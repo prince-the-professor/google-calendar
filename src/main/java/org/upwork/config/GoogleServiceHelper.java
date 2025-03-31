@@ -1,4 +1,4 @@
-package org.upwork;
+package org.upwork.config;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -54,5 +54,5 @@ public class GoogleServiceHelper {
         return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
-}
+    }
 }
