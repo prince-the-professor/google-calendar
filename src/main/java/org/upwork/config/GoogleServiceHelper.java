@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class GoogleServiceHelper {
-    private static final String APPLICATION_NAME = "Calendar Appointment Scheduler";
+    private static final String APPLICATION_NAME = "Doctor-schedular-web";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final List<String> SCOPES = List.of(
             CalendarScopes.CALENDAR, GmailScopes.GMAIL_SEND);
@@ -51,7 +51,10 @@ public class GoogleServiceHelper {
 
     public static Gmail getGmailService() throws Exception {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+        Credential cc = getCredentials(HTTP_TRANSPORT);
+        if (cc.getExpiresInSeconds() == null || cc.getExpiresInSeconds() <= 60)
+            cc.refreshToken();
+        return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY,cc )
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }

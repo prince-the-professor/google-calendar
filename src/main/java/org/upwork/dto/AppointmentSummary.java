@@ -6,7 +6,7 @@ public class AppointmentSummary {
     private String firstName;
 
     private String lastName;
-    private String emailId;
+    private String patientEmailId;
     private String startTime;
     private String endTime;
 
@@ -36,12 +36,12 @@ public class AppointmentSummary {
         this.lastName = lastName;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getPatientEmailId() {
+        return patientEmailId;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setPatientEmailId(String patientEmailId) {
+        this.patientEmailId = patientEmailId;
     }
 
     public String getStartTime() {

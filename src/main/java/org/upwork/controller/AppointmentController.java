@@ -23,7 +23,8 @@ public class AppointmentController {
 
     @PostMapping("/book-appointment")
     public ResponseEntity<String> bookAppointment(@RequestBody AppointmentRequest request) {
-        String response = calendarService.handleBooking(request);
+        String response = calendarService.bookDoctorAppointment(request);
+//        String response = null;
         if (response.startsWith("✅")) {
             return ResponseEntity.ok(response);
         } else {
@@ -32,13 +33,13 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments")
-    public ResponseEntity<List<AppointmentSummary>> getAppointments() throws IOException {
-        List<AppointmentSummary> upcoming = calendarService.getUpcomingAppointments();
+    public ResponseEntity<List<AppointmentSummary>> getAppointments(@RequestParam String doctorEmailId) throws Exception {
+        List<AppointmentSummary> upcoming = calendarService.getUpcomingAppointments(doctorEmailId);
         return ResponseEntity.ok(upcoming);
     }
 
     @PostMapping("/cancel-appointment")
-    public ResponseEntity<String> cancelAppointment(@RequestBody CancelRequest request) {
+    public ResponseEntity<String> cancelAppointment(@RequestBody CancelRequest request) throws Exception {
         String response = calendarService.cancelAppointment(request);
         if (response.startsWith("✅")) {
             return ResponseEntity.ok(response);
